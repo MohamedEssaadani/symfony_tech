@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="cours")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CoursRepository")
+
  */
 class Cours
 {
@@ -89,5 +91,4 @@ class Cours
 
         return $this;
     }
-
 }

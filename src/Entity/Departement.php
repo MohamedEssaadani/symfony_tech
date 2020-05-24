@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="departement")
  * @ORM\Entity
+ *  * @ORM\Entity(repositoryClass="App\Repository\DepartementRepository")
+
  */
 class Departement
 {
@@ -44,6 +46,4 @@ class Departement
 
         return $this;
     }
-
-
 }
