@@ -15,10 +15,10 @@ class ProfesseursController extends AbstractController
     {
         $professeurs = $repository->findAll();
 
-        dd($professeurs);
 
         return $this->render('professeurs/browse.html.twig', [
             'controller_name' => 'ProfesseursController',
+            'professeurs' => $professeurs
         ]);
     }
 }

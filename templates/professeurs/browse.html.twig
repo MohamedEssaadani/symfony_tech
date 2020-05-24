@@ -12,24 +12,33 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Cin</th>
+                                <th>Adresse</th>
+                                <th>Telephone</th>
+                                <th>Email</th>
+                                <th>Date Recrutement</th>
                                 <th>Departement</th>
-                                <th>Image</th>
-                                <th class="nosort"><a href="" class="text-green"
-                                        style="float:right;"><i class="ik ik-plus-circle text-green"></i>
-                                        New</a>
+                                <th>
+                                     <a href=""><i class="ik ik-plus text-green"></i> New</a>
+
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
+                        {% for professeur in professeurs %}
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Name</td>
-                                <td>2</td>
-                                <td>
-                                    <img src="" alt=""
-                                        class="img-thumbnail" style="width:100px; height:100px;">
-                                </td>
+                                <th scope="row">{{professeur.ID}}</th>
+                                <td>{{professeur.Nom}}</td>
+                                <td>{{professeur.Prenom}}</td>
+                                <td>{{professeur.Cin}}</td>
+                                <td>{{professeur.Adresse}}</td>
+                                <td>{{professeur.Telephone}}</td>
+                                <td>{{professeur.Email}}</td>
+                                <td>{{professeur.DateRecrutement|date('Y-m-d')}}</td>
+                                <td>{{professeur.Departement.nomDepartement}}</td>
+
                                 <td>
                                     <div class="table-actions">
                                         <a href=""><i
@@ -42,6 +51,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
