@@ -72,6 +72,19 @@ class ProfesseursController extends AbstractController
     }
 
     /**
+     * @Route("/show-professeur/{id}", name="Professeurs.show")
+     */
+    public function show(int $id, ProfesseurRepository $repository)
+    {
+        $professeur = $repository->find($id);
+
+        return $this->render('professeurs/show.html.twig', [
+            'controller_name' => 'ProfesseursController',
+            'professeur' => $professeur
+        ]);
+    }
+
+    /**
      * @Route("/destroy-professeur/{id}", name="Professeurs.destroy")
      */
 

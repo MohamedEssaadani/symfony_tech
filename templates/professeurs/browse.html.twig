@@ -1,87 +1,67 @@
 {% extends "base.html.twig" %}
 {% block body %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header d-block">
-                <h3>Professeurs</h3>
-            </div>
-            <div class="card-body p-0 table-border-style">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nom</th>
-                                <th>Prenom</th>
-                                <th>Cin</th>
-                                <th>Adresse</th>
-                                <th>Telephone</th>
-                                <th>Email</th>
-                                <th>Date Recrutement</th>
-                                <th>Departement</th>
-                                <th>
-                                     <a href="{{path('Professeurs.create')}}"><i class="ik ik-user-plus text-green" style="float:right;"></i></a>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for professeur in professeurs %}
-                            <tr>
-                                <th scope="row">{{professeur.ID}}</th>
-                                <td>{{professeur.Nom}}</td>
-                                <td>{{professeur.Prenom}}</td>
-                                <td>{{professeur.Cin}}</td>
-                                <td>{{professeur.Adresse}}</td>
-                                <td>{{professeur.Telephone}}</td>
-                                <td>{{professeur.Email}}</td>
-                                <td>{{professeur.DateRecrutement|date('Y-m-d')}}</td>
-                                <td>{{professeur.Departement.nomDepartement}}</td>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header d-block">
+					<h3>Professeurs</h3>
+				</div>
+				<div class="card-body p-0 table-border-style">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Nom</th>
+									<th>Prenom</th>
+									<th>Cin</th>
+									<th>Adresse</th>
+									<th>Telephone</th>
+									<th>Email</th>
+									<th>Date Recrutement</th>
+									<th>Departement</th>
+									<th>
+										<a href="{{path('Professeurs.create')}}">
+											<i class="ik ik-user-plus text-green" style="float:right;"></i>
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for professeur in professeurs %}
+									<tr>
+										<th scope="row">{{professeur.ID}}</th>
+										<td>{{professeur.Nom}}</td>
+										<td>{{professeur.Prenom}}</td>
+										<td>{{professeur.Cin}}</td>
+										<td>{{professeur.Adresse}}</td>
+										<td>{{professeur.Telephone}}</td>
+										<td>{{professeur.Email}}</td>
+										<td>{{professeur.DateRecrutement|date('Y-m-d')}}</td>
+										<td>{{professeur.Departement.nomDepartement}}</td>
 
-                                <td>
-                                    <div class="table-actions">
-                                        <a href="" data-toggle="modal" data-target="#exampleModal"><i
-                                                class="ik ik-eye text-blue"></i></a>
-                                        <a href="" data-toggle="modal" data-target="#exampleModal"><i
-                                                class="ik ik-edit-2 text-green"></i></a>
-                                        <a href="{{path('Professeurs.destroy',  {id:professeur.id})}}"
-                                            onclick="return confirm('Are you sure to delete this item?');"><i
-                                                class="ik ik-trash-2 text-red"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {# @else
-                <div class="container no-drinks">
-                    <h3>(0) items available!</h3>
-                </div>
-                @endif #}
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+										<td>
+											<div class="table-actions">
+												<a href="{{path('Professeurs.show', {id:professeur.id})}}">
+
+													<i class="ik ik-eye text-blue"></i>
+												</a>
+												<a href="">
+													<i class="ik ik-edit-2 text-green"></i>
+												</a>
+												<a href="{{path('Professeurs.destroy', {id:professeur.id})}}" onclick="return confirm('Are you sure to delete this item?');">
+													<i class="ik ik-trash-2 text-red"></i>
+												</a>
+											</div>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
-
