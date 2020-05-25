@@ -72,12 +72,74 @@ class ProfesseursController extends AbstractController
     }
 
     /**
+     * @Route("/edit-professeur/{id}", name="Professeurs.edit")
+     */
+
+    public function edit(ProfesseurRepository $repository, DepartementRepository $departementRepository, int $id)
+    {
+        $professeur = $repository->find($id);
+        $departements = $departementRepository->findAll();
+
+        if (!$professeur) {
+            throw $this->createNotFoundException(
+                'No Professor found for this id: ' . $id
+            );
+        }
+
+        return $this->render('professeurs/edit.html.twig', [
+            'controller_name' => 'ProfesseursController',
+            'professeur' => $professeur,
+            'departements' => $departements
+        ]);
+    }
+
+    /**
+     * @Route("/update-professeur", name="Professeurs.update")
+     */
+    public function update(Request $request, EntityManagerInterface $entityManager)
+    {
+        $id = $request->request->get('id');
+
+        $professeur = $entityManager->find(Professeur::class, $id);
+
+
+        if (!$professeur) {
+            throw $this->createNotFoundException(
+                'No Professor found for this id: ' . $id
+            );
+        }
+
+        $professeur->setNom($request->request->get("nom"));
+        $professeur->setPrenom($request->request->get("prenom"));
+        $professeur->setCin($request->request->get("cin"));
+        $professeur->setAdresse($request->request->get("adresse"));
+        $professeur->setTelephone($request->request->get("telephone"));
+        $professeur->setEmail($request->request->get("email"));
+        //dateRecrutement property accept date type so, create date variable contain date value from string value coming from form
+        $date = \DateTime::createFromFormat('Y-m-d', $request->request->get("date_recrutement"));
+        $professeur->setDateRecrutement($date);
+        //get departement object by request id in order to set it to departement property of Professor
+        $departement = $entityManager->find(Departement::class, $request->request->get("departement"));
+        $professeur->setDepartement($departement);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('Professeurs.browse');
+    }
+
+
+    /**
      * @Route("/show-professeur/{id}", name="Professeurs.show")
      */
     public function show(int $id, ProfesseurRepository $repository)
     {
         $professeur = $repository->find($id);
 
+        if (!$professeur) {
+            throw $this->createNotFoundException(
+                'No Professor found for this id: ' . $id
+            );
+        }
         return $this->render('professeurs/show.html.twig', [
             'controller_name' => 'ProfesseursController',
             'professeur' => $professeur
