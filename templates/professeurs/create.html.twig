@@ -1,0 +1,117 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-block">
+                <h3>Nouveau Professeur</h3>
+            </div>
+            <div class="card-body">
+                <form action="{{path('Professeurs.store')}}" method="POST">
+                    <div class="row">
+
+                        <label class="col-sm-4 col-lg-4 col-form-label">Nom</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                <input type="text" name="nom" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+
+                        <label class="col-sm-4 col-lg-4 col-form-label">Prénom</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                <input type="text" name="prenom" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+
+                        <label class="col-sm-4 col-lg-4 col-form-label">CIN</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                <input type="text" name="cin" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+
+                        <label class="col-sm-4 col-lg-4 col-form-label">Adresse</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                <input type="text" name="adresse" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+
+                        <label class="col-sm-4 col-lg-4 col-form-label">Téléphone</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                <input type="text" name="telephone" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+
+                        <label class="col-sm-4 col-lg-4 col-form-label">Email</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                <input type="email" name="email" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+
+                        <label class="col-sm-4 col-lg-4 col-form-label">Date Recrutement</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                <input type="date" name="date_recrutement" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+
+                        
+                        <label class="col-sm-4 col-lg-4 col-form-label">Département</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-file-text"></i></label>
+                                </span>
+                                    <select name="departement" class="form-control" required>
+                                        <option value="">--Département--</option>
+                                        {% for departement in departements  %}
+                                            <option value="{{departement.id}}">{{departement.nomDepartement}}</option>
+                                        {% endfor %}
+                                    </select>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="btn btn-success" style="float:right;"><i class="ik ik-save"></i> Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
