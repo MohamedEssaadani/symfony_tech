@@ -34,10 +34,10 @@
 
 										<td>
 											<div class="table-actions">
-												<a href="">
+												<a href="{{path('Departements.show', {id:departement.ID})}}">
 													<i class="ik ik-eye text-blue"></i>
 												</a>
-												<a href="">
+												<a href="{{path('Departements.edit', {id:departement.ID})}}">
 													<i class="ik ik-edit-2 text-green"></i>
 												</a>
 												<a href="{{path('Departements.destroy', {id:departement.ID})}}" onclick="return confirm('Voulez vous vraiment supprimer cette département ?');">

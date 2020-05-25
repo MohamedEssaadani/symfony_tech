@@ -62,6 +62,49 @@ class DepartementController extends AbstractController
         return $this->redirectToRoute('Departements.browse');
     }
 
+    /**
+     * @Route("/edit-departement/{id}", name="Departements.edit")
+     */
+    public function edit(DepartementRepository $repository, int $id)
+    {
+        $departement = $repository->find($id);
+
+        return $this->render('departements/edit.html.twig', [
+            'departement' => $departement
+        ]);
+    }
+
+    /**
+     * @Route("/update-departement", name="Departements.update")
+     */
+    public function update(EntityManagerInterface $entityManager, Request $request)
+    {
+        $id = $request->request->get('id');
+        $departement = $entityManager->getRepository(Departement::class)->find($id);
+
+        if (!$departement) {
+            throw $this->createNotFoundException(
+                'No Departement found for this id: ' . $id
+            );
+        }
+
+        $departement->setNomDepartement($request->request->get('nom'));
+        $entityManager->flush();
+
+        return $this->redirectToRoute('Departements.browse');
+    }
+
+    /**
+     * @Route("/departement/{id}", name="Departements.show")
+     */
+    public function show(DepartementRepository $departementRepository, int $id)
+    {
+        $departement = $departementRepository->find($id);
+
+        return $this->render('Departements/show.html.twig', [
+            'departement' => $departement
+        ]);
+    }
 
     /**
      * @Route("/departements/{id}/professeurs", name="Departements.professeurs")
