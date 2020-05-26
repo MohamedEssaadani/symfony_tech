@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header d-block">
+					<h3>Cours</h3>
+				</div>
+				<div class="card-body p-0 table-border-style">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Initule</th>
+									<th>Professeurs</th>
+									<th>
+										<a href="{{path('Cours.create')}}">
+											<i class="ik ik-user-plus text-green" style="float:right;"></i>
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for cour in cours %}
+									<tr>
+										<th scope="row">{{cour.ID}}</th>
+										<td>{{cour.initule}}</td>
+										<td>
+											<a href="{{path('Cours.professors', {id:cour.id})}}">
+												<i class="ik ik-eye text-blue"></i>
+											</a>
+										</td>
+
+										<td>
+											<div class="table-actions">
+												<a href="{{path('Cours.show', {id:cour.id})}}">
+
+													<i class="ik ik-eye text-blue"></i>
+												</a>
+												<a href="{{path('Cours.edit', {id:cour.id})}}">
+													<i class="ik ik-edit-2 text-green"></i>
+												</a>
+												<a href="{{path('Cours.destroy', {id:cour.ID})}}" onclick="return confirm('Voulez vous vraiment supprimer ?');">
+
+													<i class="ik ik-trash-2 text-red"></i>
+												</a>
+											</div>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
