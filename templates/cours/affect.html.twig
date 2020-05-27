@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header d-block">
+					<h3>Affecter Cour</h3>
+				</div>
+				<div class="card-body">
+					<form action="{{path("Cours.PostAffect")}}" method="POST">
+
+						<div class="row">
+
+							<label class="col-sm-4 col-lg-4 col-form-label">Cour</label>
+							<div class="col-sm-8 col-lg-8">
+								<div class="input-group">
+									<span class="input-group-prepend">
+										<label class="input-group-text">
+											<i class="ik ik-file-text"></i>
+										</label>
+									</span>
+									<select name="cour" class="form-control" required>
+										<option value="">--Cour--</option>
+										{% for cour in cours  %}
+											<option value="{{cour.id}}">{{cour.initule}}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+							<label class="col-sm-4 col-lg-4 col-form-label">Professeur</label>
+							<div class="col-sm-8 col-lg-8">
+								<div class="input-group">
+									<span class="input-group-prepend">
+										<label class="input-group-text">
+											<i class="ik ik-user"></i>
+										</label>
+									</span>
+									<select name="professor" class="form-control" required>
+										<option value="">--Professeur--</option>
+										{% for professeur in professeurs  %}
+											<option value="{{professeur.id}}">
+												{{professeur.Nom}}
+												{{professeur.prenom}}
+											</option>
+
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+
+						</div>
+						<button class="btn btn-success" style="float:right;">
+							<i class="ik ik-save"></i>
+							Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

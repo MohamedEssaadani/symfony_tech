@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Entity\Professeur;
 use App\Repository\CoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -113,5 +114,42 @@ class CoursController extends AbstractController
         return $this->render('cours/professeurs.html.twig', [
             'professeurs' => $professeurs
         ]);
+    }
+
+    /**
+     * @Route("/affect-cour", name="Cours.GetAffect")
+     */
+    public function getAffect(EntityManagerInterface $entityManager)
+    {
+        //get course 
+        $cours = $entityManager->getRepository(Cours::class)->findAll();
+
+        //get professor
+        $professeurs = $entityManager->getRepository(Professeur::class)->findAll();
+
+
+        return $this->render('cours/affect.html.twig', [
+            'professeurs' => $professeurs,
+            'cours' => $cours
+        ]);
+    }
+
+    /**
+     * @Route("/affect-cour-post", name="Cours.PostAffect")
+     */
+    public function postAffect(Request $request, EntityManagerInterface $entityManager)
+    {
+        //get course 
+        $cour = $entityManager->getRepository(Cours::class)->find($request->request->get("cour"));
+
+        //get professor
+        $professeur = $entityManager->getRepository(Professeur::class)->find($request->request->get("professor"));
+
+        $cour->addProfesseur($professeur);
+        $professeur->addCour($cour);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('Cours.browse');
     }
 }

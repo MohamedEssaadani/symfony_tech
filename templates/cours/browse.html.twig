@@ -4,7 +4,15 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header d-block">
-					<h3>Cours</h3>
+					<div>
+						<h3 style="float:left;">Cours</h3>
+						<a href="{{path("Cours.GetAffect")}}" class="text-green" style=" float:right;">
+
+							<i class="ik ik-plus"></i>
+							<b>Affecter</b>
+
+						</a>
+					</div>
 				</div>
 				<div class="card-body p-0 table-border-style">
 					<div class="table-responsive">
@@ -16,7 +24,7 @@
 									<th>Professeurs</th>
 									<th>
 										<a href="{{path('Cours.create')}}">
-											<i class="ik ik-user-plus text-green" style="float:right;"></i>
+											<i class="ik ik-file-plus text-green" style="float:right;"></i>
 										</a>
 									</th>
 								</tr>
