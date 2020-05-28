@@ -38,7 +38,6 @@ class CoursController extends AbstractController
      */
     public function store(Request $request, EntityManagerInterface $entityManager)
     {
-
         $cour = new Cours();
         $cour->setInitule($request->request->get('initule'));
         $entityManager->persist($cour);
@@ -76,8 +75,11 @@ class CoursController extends AbstractController
      */
     public function update(Request $request, EntityManagerInterface $entityManager)
     {
+        //get the id from the request object
         $id = $request->request->get("id");
+        //get the course by id
         $cour = $entityManager->getRepository(Cours::class)->find($id);
+        //change initule value of the course & save changes
         $cour->setInitule($request->request->get("initule"));
         $entityManager->flush();
 
@@ -91,7 +93,10 @@ class CoursController extends AbstractController
      */
     public function destroy(int $id, EntityManagerInterface $entityManager)
     {
+        //get the course object by id
         $cour = $entityManager->getRepository(Cours::class)->find($id);
+
+        //remove the course & save changes
         $entityManager->remove($cour);
         $entityManager->flush();
 
@@ -112,7 +117,8 @@ class CoursController extends AbstractController
 
 
         return $this->render('cours/professeurs.html.twig', [
-            'professeurs' => $professeurs
+            'professeurs' => $professeurs,
+            'cour' => $cour
         ]);
     }
 
@@ -145,9 +151,12 @@ class CoursController extends AbstractController
         //get professor
         $professeur = $entityManager->getRepository(Professeur::class)->find($request->request->get("professor"));
 
+        //add professor to the course
         $cour->addProfesseur($professeur);
+        //add the course to the profssor
         $professeur->addCour($cour);
 
+        //save changes
         $entityManager->flush();
 
         return $this->redirectToRoute('Cours.browse');
