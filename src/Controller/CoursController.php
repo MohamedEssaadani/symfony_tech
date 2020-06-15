@@ -149,10 +149,12 @@ class CoursController extends AbstractController
         $cour = $entityManager->getRepository(Cours::class)->find($request->request->get("cour"));
 
         //get professor
-        $professeur = $entityManager->getRepository(Professeur::class)->find($request->request->get("professor"));
+        $professeur = $entityManager->getRepository(Professeur::class)
+            ->find($request->request->get("professor"));
 
         //add professor to the course
         $cour->addProfesseur($professeur);
+
         //add the course to the profssor
         $professeur->addCour($cour);
 
