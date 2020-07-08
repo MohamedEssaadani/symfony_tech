@@ -123,7 +123,7 @@ class CoursController extends AbstractController
     }
 
     /**
-     * @Route("/affect-cour", name="Cours.GetAffect")
+     * @Route("/affect-prof", name="Cours.GetAffect")
      */
     public function getAffect(EntityManagerInterface $entityManager)
     {
@@ -141,22 +141,29 @@ class CoursController extends AbstractController
     }
 
     /**
-     * @Route("/affect-cour-post", name="Cours.PostAffect")
+     * @Route("/affect-prof-post", name="Cours.PostAffectProfs")
      */
     public function postAffect(Request $request, EntityManagerInterface $entityManager)
     {
-        //get course 
+        //get selected professors
+        $professeurs = $request->request->get("professors");
+
+        //get selected course 
         $cour = $entityManager->getRepository(Cours::class)->find($request->request->get("cour"));
 
-        //get professor
-        $professeur = $entityManager->getRepository(Professeur::class)
-            ->find($request->request->get("professor"));
+        //loop trough selected professors & add them to selected course
+        foreach ($professeurs as $professeur) {
+            //get professor
+            $prof = $entityManager->getRepository(Professeur::class)
+                ->find($professeur);
+            //add professor to the course
+            $cour->addProfesseur($prof);
 
-        //add professor to the course
-        $cour->addProfesseur($professeur);
+            //add the course to the profssor
+            $prof->addCour($cour);
+        }
 
-        //add the course to the profssor
-        $professeur->addCour($cour);
+
 
         //save changes
         $entityManager->flush();

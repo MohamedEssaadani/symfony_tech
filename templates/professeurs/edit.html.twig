@@ -20,7 +20,8 @@
 											<i class="ik ik-slack"></i>
 										</label>
 									</span>
-									<input type="text" name="id" value="{{professeur.id}}" readonly class="form-control">
+									<input type="text" name="id" value="{{professeur.id}}" readonly
+									 class="form-control">
 								</div>
 							</div>
 
@@ -33,7 +34,8 @@
 											<i class="ik ik-terminal"></i>
 										</label>
 									</span>
-									<input type="text" name="nom" value="{{professeur.nom}}" class="form-control" required>
+									<input type="text" name="nom" value="{{professeur.nom}}"
+									 class="form-control" required>
 								</div>
 							</div>
 
@@ -45,7 +47,8 @@
 											<i class="ik ik-terminal"></i>
 										</label>
 									</span>
-									<input type="text" name="prenom" value="{{professeur.prenom}}" class="form-control" required>
+									<input type="text" name="prenom" value="{{professeur.prenom}}"
+									 class="form-control" required>
 
 
 								</div>
@@ -59,7 +62,8 @@
 											<i class="ik ik-credit-card"></i>
 										</label>
 									</span>
-									<input type="text" name="cin" value="{{professeur.cin}}" class="form-control" required>
+									<input type="text" name="cin" value="{{professeur.cin}}"
+									 class="form-control" required>
 
 								</div>
 							</div>
@@ -72,7 +76,8 @@
 											<i class="ik ik-home"></i>
 										</label>
 									</span>
-									<input type="text" name="adresse" value="{{professeur.adresse}}" class="form-control" required>
+									<input type="text" name="adresse" value="{{professeur.adresse}}"
+									 class="form-control" required>
 
 								</div>
 							</div>
@@ -98,7 +103,8 @@
 											<i class="ik ik-at-sign"></i>
 										</label>
 									</span>
-									<input type="email" name="email" value="{{professeur.email}}" class="form-control" required>
+									<input type="email" name="email" value="{{professeur.email}}" 
+									class="form-control" required>
 
 								</div>
 							</div>
@@ -111,7 +117,9 @@
 											<i class="ik ik-watch"></i>
 										</label>
 									</span>
-									<input type="date" name="date_recrutement" value="{{professeur.dateRecrutement|date('Y-m-d')}}" class="form-control" required>
+									<input type="date" name="date_recrutement" 
+									value="{{professeur.dateRecrutement|date('Y-m-d')}}" 
+									class="form-control" required>
 								</div>
 							</div>
 
@@ -128,9 +136,13 @@
 										<option value="">--Département--</option>
 										{% for departement in departements  %}
 											{% if departement.id == professeur.departement.id %}
-												<option value="{{departement.id}}" selected>{{departement.nomDepartement}}</option>
+												<option value="{{departement.id}}" selected>
+												{{departement.nomDepartement}}
+												</option>
 											{% else %}
-												<option value="{{departement.id}}">{{departement.nomDepartement}}</option>
+												<option value="{{departement.id}}">
+												{{departement.nomDepartement}}
+												</option>
 											{% endif %}
 										{% endfor %}
 									</select>

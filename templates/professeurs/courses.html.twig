@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header d-block">
+					<div>
+						<h3 style="float:left;">Cours de professeur:
+							{{professor.nom}}
+							{{professor.prenom}}</h3>
+					</div>
+				</div>
+				<div class="card-body p-0 table-border-style">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Initule</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for cour in courses %}
+									<tr>
+										<th scope="row">{{cour.ID}}</th>
+										<td>{{cour.initule}}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

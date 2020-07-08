@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Emsi
+			{% block title %}
+				Emsi
 			{% endblock %}
 		</title>
-		{% block stylesheets %}{% endblock %}
-		<meta name="description" content="">
-		<meta name="keywords" content="">
+
+
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="icon" href="http://www.emsi.ma/wp-content/uploads/2018/04/fav-icon.png" type="image/x-icon"/>
@@ -30,6 +30,8 @@
 		<link rel="stylesheet" href="{{asset("assets/plugins/owl.carousel/dist/assets/owl.theme.default.min.css")}}">
 		<link rel="stylesheet" href="{{asset("assets/dist/css/theme.min.css")}}">
 		<script src="{{asset("assets/src/js/vendor/modernizr-2.8.3.min.js")}}"></script>
+
+		{% block stylesheets %}{% endblock %}
 
 
 	</head>

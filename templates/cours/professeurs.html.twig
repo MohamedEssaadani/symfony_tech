@@ -2,66 +2,78 @@
 {% block body %}
 	<div class="row">
 		<div class="col-md-12">
-			<div class="card">
-				<div class="card-header d-block">
-					<h3>Professeurs de cour:
-						{{cour.initule}}</h3>
-				</div>
-				<div class="card-body p-0 table-border-style">
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Nom</th>
-									<th>Prenom</th>
-									<th>Cin</th>
-									<th>Adresse</th>
-									<th>Telephone</th>
-									<th>Email</th>
-									<th>Date Recrutement</th>
-									<th>Departement</th>
-									<th>
-										<a href="{{path('Professeurs.create')}}">
-											<i class="ik ik-user-plus text-green" style="float:right;"></i>
-										</a>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for professeur in professeurs %}
-									<tr>
-										<th scope="row">{{professeur.ID}}</th>
-										<td>{{professeur.Nom}}</td>
-										<td>{{professeur.Prenom}}</td>
-										<td>{{professeur.Cin}}</td>
-										<td>{{professeur.Adresse}}</td>
-										<td>{{professeur.Telephone}}</td>
-										<td>{{professeur.Email}}</td>
-										<td>{{professeur.DateRecrutement|date('Y-m-d')}}</td>
-										<td>{{professeur.Departement.nomDepartement}}</td>
+			<div class="container">
+				{% if professeurs | length > 0 %}
 
-										<td>
-											<div class="table-actions">
-												<a href="{{path('Professeurs.show', {id:professeur.id})}}">
+					<div class="card">
+						<div class="card-header d-block">
+							<h3>
+								Professeurs de cour:
+								{{cour.initule}}
+							</h3>
+						</div>
+						<div class="card-body p-0 table-border-style">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Nom</th>
+											<th>Prenom</th>
+											<th>Cin</th>
+											<th>Adresse</th>
+											<th>Telephone</th>
+											<th>Email</th>
+											<th>Date Recrutement</th>
+											<th>Departement</th>
+											<th>
+												<a href="{{path('Professeurs.create')}}">
+													<i class="ik ik-user-plus text-green" style="float:right;"></i>
+												</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for professeur in professeurs %}
+											<tr>
+												<th scope="row">{{professeur.ID}}</th>
+												<td>{{professeur.Nom}}</td>
+												<td>{{professeur.Prenom}}</td>
+												<td>{{professeur.Cin}}</td>
+												<td>{{professeur.Adresse}}</td>
+												<td>{{professeur.Telephone}}</td>
+												<td>{{professeur.Email}}</td>
+												<td>{{professeur.DateRecrutement|date('Y-m-d')}}</td>
+												<td>{{professeur.Departement.nomDepartement}}</td>
 
-													<i class="ik ik-eye text-blue"></i>
-												</a>
-												<a href="{{path('Professeurs.edit', {id:professeur.id})}}">
-													<i class="ik ik-edit-2 text-green"></i>
-												</a>
-												<a href="{{path('Professeurs.destroy', {id:professeur.id})}}" onclick="return confirm('Voulez vous vraiment supprimer?');">
-													<i class="ik ik-trash-2 text-red"></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
+												<td>
+													<div class="table-actions">
+														<a href="{{path('Professeurs.show', {id:professeur.id})}}">
+
+															<i class="ik ik-eye text-blue"></i>
+														</a>
+														<a href="{{path('Professeurs.edit', {id:professeur.id})}}">
+															<i class="ik ik-edit-2 text-green"></i>
+														</a>
+														<a href="{{path('Professeurs.destroy', {id:professeur.id})}}" onclick="return confirm('Voulez vous vraiment supprimer?');">
+															<i class="ik ik-trash-2 text-red"></i>
+														</a>
+													</div>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+						</div>
 					</div>
 
-				</div>
+
+				{% else %}
+					<h3>No Professors are available for
+						{{cour.initule}}!!</h3>
+				{% endif %}
 			</div>
 		</div>
 	</div>

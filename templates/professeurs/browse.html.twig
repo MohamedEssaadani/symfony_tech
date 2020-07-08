@@ -4,11 +4,10 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header d-block">
-
 					<div>
 						<h3 style="float:left;">Professeurs</h3>
 
-						<a href="" class="text-green" style=" float:right;">
+						<a href="{{path('Professors.GetAffect')}}" class="text-green" style=" float:right;">
 
 							<i class="ik ik-plus"></i>
 							<b>Affecter</b>
@@ -31,6 +30,7 @@
 									<th>Email</th>
 									<th>Date Recrutement</th>
 									<th>Departement</th>
+									<th>Cours</th>
 									<th>
 										<a href="{{path('Professeurs.create')}}">
 											<i class="ik ik-user-plus text-green" style="float:right;"></i>
@@ -50,7 +50,12 @@
 										<td>{{professeur.Email}}</td>
 										<td>{{professeur.DateRecrutement|date('Y-m-d')}}</td>
 										<td>{{professeur.Departement.nomDepartement}}</td>
+										<td>
+											<a href="{{path('Professors.Courses', {id:professeur.id})}}">
+												<i class="ik ik-eye text-blue"></i>
+											</a>
 
+										</td>
 										<td>
 											<div class="table-actions">
 												<a href="{{path('Professeurs.show', {id:professeur.id})}}">

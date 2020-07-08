@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Departement;
+use App\Entity\Cours;
 use App\Entity\Professeur;
+use App\Entity\Departement;
+use PhpParser\Node\Expr\Cast\String_;
 use App\Repository\ProfesseurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\DepartementRepository;
-use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,7 +55,8 @@ class ProfesseursController extends AbstractController
         $professeur->setAdresse($request->request->get("adresse"));
         $professeur->setTelephone($request->request->get("telephone"));
         $professeur->setEmail($request->request->get("email"));
-        //dateRecrutement property accept date type so, create date variable contain date value from string value coming from form
+        //dateRecrutement property accept date type so, create date variable contain date
+        // value from string value coming from form
         $date = \DateTime::createFromFormat('Y-m-d', $request->request->get("date_recrutement"));
         $professeur->setDateRecrutement($date);
         //get departement object by request id in order to set it to departement property of Professor
@@ -75,8 +77,11 @@ class ProfesseursController extends AbstractController
      * @Route("/edit-professeur/{id}", name="Professeurs.edit")
      */
 
-    public function edit(ProfesseurRepository $repository, DepartementRepository $departementRepository, int $id)
-    {
+    public function edit(
+        ProfesseurRepository $repository,
+        DepartementRepository $departementRepository,
+        int $id
+    ) {
         $professeur = $repository->find($id);
         $departements = $departementRepository->findAll();
 
@@ -157,5 +162,73 @@ class ProfesseursController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('Professeurs.browse');
+    }
+
+
+    /**
+     * @Route("/affect-cour", name="Professors.GetAffect")
+     */
+    public function getAffect(EntityManagerInterface $entityManager)
+    {
+        //get course 
+        $cours = $entityManager->getRepository(Cours::class)->findAll();
+
+        //get professor
+        $professeurs = $entityManager->getRepository(Professeur::class)->findAll();
+
+
+        return $this->render('professeurs/affect.html.twig', [
+            'professeurs' => $professeurs,
+            'cours' => $cours
+        ]);
+    }
+
+    /**
+     * @Route("/affect-cour-post", name="Professors.PostAffect")
+     */
+    public function postAffect(Request $request, EntityManagerInterface $entityManager)
+    {
+        //get selected courses
+        $cours = $request->request->get("cours");
+
+        //get selected professor 
+        $professeur = $entityManager->getRepository(Professeur::class)->find($request->request->get("professor"));
+
+        //loop trough selected professors & add them to selected course
+        foreach ($cours as $cour) {
+            //get cour
+            $c = $entityManager->getRepository(Cours::class)
+                ->find($cour);
+            //add cour to the professor
+            $professeur->addCour($c);
+
+            //add Professor to course
+            $c->addProfesseur($professeur);
+        }
+
+
+
+        //save changes
+        $entityManager->flush();
+
+        return $this->redirectToRoute('Professeurs.browse');
+    }
+
+    //this function is for showing courses of selected professor
+    //it will accept as parameter id of professor & get his courses 
+    /**
+     * @Route("/professor-courses/{id}", name="Professors.Courses")
+     */
+    public function getCourses(int $id, ProfesseurRepository $repository)
+    {
+        //get professor that has id
+        $professor = $repository->find($id);
+        //get his courses
+        $courses = $professor->getCour();
+
+        return $this->render('professeurs/courses.html.twig', [
+            'courses' => $courses,
+            'professor' => $professor
+        ]);
     }
 }

@@ -6,30 +6,13 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header d-block">
-					<h3>Affecter Professeurs</h3>
+					<h3>Affecter Cours</h3>
 				</div>
 				<div class="card-body">
-					<form action="{{path("Cours.PostAffectProfs")}}" method="POST">
-
+					<form action="{{path("Professors.PostAffect")}}" method="POST">
 
 						<div class="row">
 
-							<label class="col-sm-4 col-lg-4 col-form-label">Cour</label>
-							<div class="col-sm-8 col-lg-8">
-								<div class="input-group">
-									<span class="input-group-prepend">
-										<label class="input-group-text">
-											<i class="ik ik-file-text"></i>
-										</label>
-									</span>
-									<select name="cour" class=" form-control" required>
-										<option value=" ">--Cour--</option>
-										{% for cour in cours  %}
-											<option value="{{cour.id}}">{{cour.initule}}</option>
-										{% endfor %}
-									</select>
-								</div>
-							</div>
 
 							<label class="col-sm-4 col-lg-4 col-form-label">Professeur</label>
 							<div class="col-sm-8 col-lg-8">
@@ -39,7 +22,8 @@
 											<i class="ik ik-user"></i>
 										</label>
 									</span>
-									<select name="professors[]" multiple class="form-control" required>
+									<select name="professor" class="form-control" required>
+										<option value="">--Professeur--</option>
 										{% for professeur in professeurs  %}
 											<option value="{{professeur.id}}">
 												{{professeur.Nom}}
@@ -51,6 +35,21 @@
 								</div>
 							</div>
 
+							<label class="col-sm-4 col-lg-4 col-form-label">Cour</label>
+							<div class="col-sm-8 col-lg-8">
+								<div class="input-group">
+									<span class="input-group-prepend">
+										<label class="input-group-text">
+											<i class="ik ik-file-text"></i>
+										</label>
+									</span>
+									<select name="cours[]" multiple class="form-control" required>
+										{% for cour in cours  %}
+											<option value="{{cour.id}}">{{cour.initule}}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
 
 						</div>
 						<button class="btn btn-success" style="float:right;">
